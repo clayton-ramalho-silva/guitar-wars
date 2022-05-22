@@ -50,9 +50,37 @@ class ScoreController extends Controller
 
         $score->save();
 
-
         return view('site.confirmation', compact('score'));
 
+    }
+
+    public function admin()
+    {
+        $scores = Score::all();
+
+        return view('admin.index', compact('scores'));
+    }
+
+    public function destroyShow($id)
+    {
+        $user = Score::findOrFail($id);
+
+        return view('admin.destroy', compact('user'));
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        $delete = $request->optradio;
+
+        if($delete == 0){
+            return redirect()->route('admin');
+        }
+
+        $score = Score::findOrFail($id);
+
+        $score->delete();
+
+        return view('admin.delete-confirm', compact('score'));
 
     }
 }

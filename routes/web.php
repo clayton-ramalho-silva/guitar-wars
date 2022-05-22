@@ -15,5 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [ScoreController::class, 'index'])->name('index-score');
-Route::get('/add',[ScoreController::class, 'create'])->name('add-score');
-Route::post('/add',[ScoreController::class, 'store']);
+Route::get('/add', [ScoreController::class, 'create'])->name('add-score');
+Route::post('/add', [ScoreController::class, 'store']);
+Route::get('/admin', [ScoreController::class, 'admin'])->name('admin');
+Route::get('/destroy/{id}', [ScoreController::class, 'destroyShow'])->name('delete-confirmation');
+Route::delete('/destroy{id}', [ScoreController::class, 'destroy'])->name('delete');
