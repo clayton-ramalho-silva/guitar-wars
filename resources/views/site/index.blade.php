@@ -1,11 +1,27 @@
 @extends('principal')
 
 @section('conteudo-principal')
-<div class="container">
-    <h1><a href="{{ route('index-score') }}">Guitar Wars - High Sores</a></h1>
-    <p>Welcome, Guitar Warrio, do you have what it takes to check the high score list? If no, just <a href="{{ route('add-score') }}">add your score</a></p>
-    <hr>
+<div class="container clearfix mt-3">
+    <div class="float-start">
+        <h1><a href="{{ route('index-score') }}">Guitar Wars - High Sores</a></h1>
+        <p>Welcome, Guitar Warrio, do you have what it takes to check the high score list? If no, just <a href="{{ route('add-score') }}">add your score</a></p>
+    </div>
+    <div class="float-end">
+        @guest()
+            <a href="{{ route('login') }}" class="btn btn-success">Login</a>
+        @endguest
+
+        @auth()
+            <form action="{{ route('logout') }}" method="post">
+                @csrf
+
+                <button type="submit" class="btn btn-primary">Sair</button>
+            </form>
+        @endauth
+
+    </div>
 </div>
+<hr>
 
 <div class="container mt-3">
 

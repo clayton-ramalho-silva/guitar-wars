@@ -17,7 +17,7 @@ class CreateScoresTable extends Migration
             $table->id();
             $table->dateTime('date');
             $table->string('name');
-            $table->string('score');
+            $table->integer('score');
             $table->timestamps();
         });
     }

@@ -12,9 +12,12 @@ class ScoreController extends Controller
     {
         $scores = DB::table('scores')
                         ->orderBy('score', 'desc')
+                        ->orderBy('date', 'asc')
                         ->get();
+        //dd($scores);
 
-        $topScore = DB::table('scores')->max('score');
+
+        $topScore = Score::all()->max('score');
 
         return view('site.index', compact('scores', 'topScore'));
     }
