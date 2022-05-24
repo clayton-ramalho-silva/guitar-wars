@@ -10,11 +10,15 @@ class ScoreController extends Controller
 {
     public function index()
     {
-        $scores = DB::table('scores')
-                        ->orderBy('score', 'desc')
-                        ->orderBy('date', 'asc')
-                        ->get();
-        //dd($scores);
+        // $scores = DB::table('scores')
+        //                 ->orderBy('score', 'desc')
+        //                 ->orderBy('date', 'asc')
+        //                 ->get();
+
+        $scores = Score::where('approved', 1)
+                            ->orderBy('score', 'desc')
+                            ->orderBy('date', 'asc')
+                            ->get();
 
 
         $topScore = Score::all()->max('score');
@@ -84,6 +88,32 @@ class ScoreController extends Controller
         $score->delete();
 
         return view('admin.delete-confirm', compact('score'));
+
+    }
+
+    public function approvedShow($id)
+    {
+        $user = Score::findOrFail($id);
+
+        return view('admin.approved', compact('user'));
+    }
+
+    public function approved(Request $request, $id)
+    {
+        $approved = $request->optradio;
+
+        if($approved == 0){
+            return redirect()->route('admin');
+        }
+
+        $score = Score::findOrFail($id);
+
+        $score->approved = $approved;
+
+        $score->save();
+
+        return view('admin.approved-confirm', compact('score'));
+
 
     }
 }

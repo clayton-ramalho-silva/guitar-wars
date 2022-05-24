@@ -21,6 +21,9 @@ Route::post('/add', [ScoreController::class, 'store']);
 Route::get('/admin', [ScoreController::class, 'admin'])->name('admin')->middleware('auth');
 Route::get('/destroy/{id}', [ScoreController::class, 'destroyShow'])->name('delete-confirmation')->middleware('auth');
 Route::delete('/destroy{id}', [ScoreController::class, 'destroy'])->name('delete')->middleware('auth');
+Route::get('/approved/{id}', [ScoreController::class, 'approvedShow'])->name('approved-confirmation')->middleware('auth');
+Route::put('/approved/{id}', [ScoreController::class, 'approved'])->name('approved')->middleware('auth');
+
 
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate']);

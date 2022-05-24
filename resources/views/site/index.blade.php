@@ -26,7 +26,7 @@
 <div class="container mt-3">
 
     <div class="row mt-4 p-5 bg-primary text-white rounded">
-        <p>Top Score: {{ $topScore }}</p>
+        <p>Top Score: <span class="h1">{{ $topScore }}</span></p>
     </div>
     @foreach ($scores as $score)
 
